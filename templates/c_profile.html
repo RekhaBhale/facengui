@@ -1,0 +1,103 @@
+{% extends 'layout_company.html' %}
+
+{% block content %}
+
+<html>
+<head>
+    <title>Facial Recognition Service</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='lodash.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='immutable.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+    <style>
+         .form_area{
+            margin-left:350px;
+            width:720px;
+        }
+        .form_area input[type=file]{
+            margin-left:100px;
+            height:30px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-radius:5px;
+        }
+        .form_area input[type=text],
+        .form_area input[type=date],
+        .form_area input[type=password],
+        .form_area select{
+            height:50px;
+            width:350px;
+            color:#000033;
+            border:black;
+            font-size:20px;
+            border-radius:5px;
+        }
+        .form_area label{
+            margin-left:120px;
+            height:50px;
+            width:50px;
+            font-weight:bold;
+            font-size:20px;
+            color:#000033;
+        }
+        .form_area fieldset{
+	        width:550px;
+        }
+        .form_area legend{
+	        font-size:20px;
+	        font-weight:bold;
+	        color:#000033;
+        }
+        .form_area button
+        {
+	        border:none;
+            height:37px;
+            outline:none;
+            color:#ffffff;
+            font-size:18px;
+            background-color:#000033;
+            cursor:pointer;
+            font-weight:bold;
+             text-decoration:none;
+           border-radius:20px;
+            margin-left:120px;
+            width:300px;
+        }
+        .form_area h1{
+            text-align:center;
+            font-size:30px;
+            font-weight:bold;
+        }
+        .form_area img{
+            width:180px;
+            height:180px;
+            margin-left:250px;
+        }
+    </style>
+</head>
+<body>
+
+    <br><br><br>
+    <div class="form_area"  method="post">
+        <h1>CRIMINAL PROFILE</h1>
+        {% for row in rows %}
+        <img src="static/storage/trained/{{row['filename']}}" alt="img"><br><br>
+        <label>Name:</label> <input type="text" value="{{row['name']}}" name="name"><br>
+        <label>Date of Birth: </label><input type="text" value="{{row['dob']}}" name="dob"><br>
+        <label>Gender: </label>
+        <input type="text" value="{{row['gender']}}" name="gender"><br>
+        <label>Contact Number: </label><input type="text" value="{{row['contact']}}" name="contact"><br>
+        <label>Address:</label> <input type="text" value="{{row['address']}}" name="address"><br>
+        <label>Aadhar Number: </label><input type="text" value="{{row['aadhar']}}" name="aadhar"><br>
+        <label>Crime:</label> <input type="text" value="{{row['crime']}}" name="crime"><br>
+        <label>Act:</label> <input type="text" value="{{row['act']}}" name="act"><br><br>
+
+        <br><br>
+        {% endfor %}
+    </div>
+    <br><br>
+</body>
+{% endblock %}

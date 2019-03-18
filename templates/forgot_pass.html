@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<style>
+.d1{
+    width:100%;
+    height:160px;
+    background-color:#99bbff;
+    color:black;
+    padding:0;
+}
+body{
+}
+h3{
+	text-align:center;
+	font-weight:bold;
+	font-size:25px;
+	color:#000033;
+}
+h1{
+    text-align:center;
+  	line-height:110px;
+    font-size:30px;
+    text-decoration:bold;
+}
+h5
+{
+      text-align:center;
+}
+.form_area{
+	margin-left:350px;
+}
+.form_area input[type=text],
+.form_area input[type=password],
+.form_area input[type=email],
+.form_area select
+{
+	margin-left:50px;
+    height:40px;
+    width:450px;
+    color:#000033;
+    border:black;
+    border-bottom:1px solid #002266;
+    border-radius:5px;
+}
+.form_area fieldset{
+	width:550px;
+}
+.form_area legend{
+	font-size:20px;
+	font-weight:bold;
+	color:#000033;
+
+}
+.form_area button
+{
+	border:none;
+    height:40px;
+    outline:none;
+    color:#ffffff;
+    font-size:20px;
+    background-color:#000033;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:20px;
+    text-decoration:none;
+    margin-left:75px;
+    width:175px;
+}
+</style>
+
+<script>
+	var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+var myInput = document.getElementById("password");
+var letter = document.getElementById("letter");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  var upperCaseLetters = /[A-Z]/g;
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(lowerCaseLetters) && myInput.value.match(upperCaseLetters) && myInput.value.match(numbers) && (myInput.value.length >= 8)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+}
+</script>
+
+<div class="d1">
+		<h1>Criminal Face Detection and Data Extraction</h1>
+		<h5>-----Developed by Rekha, Amey & Dipali-----</h5>
+</div><br>
+<h3>PASSWORD RESET</h3>
+<form class="form_area" action="{{ url_for('pass_reset')}}" method="post">
+		<fieldset>
+			<legend>Organization Details</legend><br>
+			<input type="text" name="username" placeholder="username" required><br><br>
+			<input type="password" id="password" name="password" placeholder="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least 8 character with number, Uppercase and a special char" required><br><br>
+			<input type="password" id="confirm_password" name="cpassword" placeholder="confirm password" onkeyup='check();' required>
+			<span id='message'></span>
+		</fieldset><br><br>
+		<button type="submit" id="submit">Submit</button>
+        <a href="/logout"><button>Cancel</button></a>
+		<br><br><br>
+</form>
